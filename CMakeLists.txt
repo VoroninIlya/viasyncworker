@@ -6,8 +6,20 @@ project(tst_viasyncworker)
 include(CTest)
 
 if(PROJECT_IS_TOP_LEVEL)
-# Set as executable
-add_subdirectory(${UNITY_ROOT_PATH} ${${EXECUTABLE}_BINARY_DIR}/modules/gtest)
+    if(NOT DEFINED UNITY_ROOT_PATH)
+        set(UNITY_ROOT_PATH "../unity")
+    endif()
+
+    if(NOT DEFINED GTEST_ROOT_PATH)
+        set(GTEST_ROOT_PATH "../gtest")
+    endif()
+
+
+    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/modules/unity)
+    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/modules/gtest)
+    # Set as executable
+    add_subdirectory(${UNITY_ROOT_PATH} ${CMAKE_BINARY_DIR}/modules/unity)
+    add_subdirectory(${GTEST_ROOT_PATH} ${CMAKE_BINARY_DIR}/modules/gtest)
 endif()
 
 # Add core subdir
@@ -28,25 +40,27 @@ target_include_directories(tst_viasyncworker PUBLIC
     ${UNITY_ROOT_PATH}/src
     ${UNITY_ROOT_PATH}/extras/fixture/src
     ${UNITY_ROOT_PATH}/extras/memory/src
+    ${GTEST_ROOT_PATH}/googlemock/include
 )
 
 # Compilation definition information
 target_compile_definitions(tst_viasyncworker PUBLIC
-    WIN32
-    _DEBUG
-    CONSOLE
+    #WIN32
+    #_DEBUG
+    #CONSOLE
 )
 
 # Compiler options
 target_compile_options(tst_viasyncworker PRIVATE
     -g
-    --coverage
+    -fprofile-arcs 
+    -ftest-coverage
     -Wall
     -Wextra
     -Wpedantic
 )
 
 target_link_libraries(
-  tst_viasyncworker viasyncworker unity -g -coverage -lgcov)
+  tst_viasyncworker viasyncworker unity gmock -lgcov -fprofile-arcs -ftest-coverage -pthread)
 
-#add_test(NAME VIHCSR04_Init COMMAND tst_vibuttonctrl "--gtest_filter=VIHCSR04_Init.*")
+add_test(NAME ViAsyncWorkerTest COMMAND tst_viasyncworker "--gtest_filter=ViAsyncWorkerTest.*")
