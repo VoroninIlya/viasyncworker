@@ -1,4 +1,3 @@
-#include "viasyncworker.hpp"
 #include <gtest/gtest.h>
 
 int main(int argc, const char* argv[]) {

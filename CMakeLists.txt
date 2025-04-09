@@ -32,11 +32,13 @@ enable_testing()
 target_sources(tst_viasyncworker PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/tests/main/main.cpp
     ${CMAKE_CURRENT_LIST_DIR}/tests/tst_viasyncworker.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/tests/tst_viduplexqueue.cpp
 )
 
 # Add key include paths
 target_include_directories(tst_viasyncworker PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/core/src/inc
+    ${CMAKE_CURRENT_LIST_DIR}/tests/mock
     ${UNITY_ROOT_PATH}/src
     ${UNITY_ROOT_PATH}/extras/fixture/src
     ${UNITY_ROOT_PATH}/extras/memory/src
@@ -64,3 +66,4 @@ target_link_libraries(
   tst_viasyncworker viasyncworker unity gmock -lgcov -fprofile-arcs -ftest-coverage -pthread)
 
 add_test(NAME ViAsyncWorkerTest COMMAND tst_viasyncworker "--gtest_filter=ViAsyncWorkerTest.*")
+add_test(NAME ViDuplexQueueTest COMMAND tst_viasyncworker "--gtest_filter=ViDuplexQueueTest.*")

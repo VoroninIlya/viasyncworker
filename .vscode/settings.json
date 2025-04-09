@@ -68,6 +68,7 @@
     "typeinfo": "cpp",
     "variant": "cpp",
     "format": "cpp",
-    "future": "cpp"
+    "future": "cpp",
+    "cinttypes": "cpp"
   }
 }

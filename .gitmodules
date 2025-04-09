@@ -1,0 +1,3 @@
+[submodule "cmake_toolchains"]
+	path = cmake_toolchains
+	url = git@github.com:VoroninIlya/cmake_toolchains.git

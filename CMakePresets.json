@@ -1,12 +1,11 @@
 {
   "version": 3,
   "configurePresets": [
-    {
-      "name": "default-aarch64-host-lin",
+    { "name": "default-aarch64-host-lin",
       "hidden": true,
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
-      "toolchainFile": "${sourceDir}/cmake/host-lin/gnu-aarch64-none-linux-gcc.cmake",
+      "toolchainFile": "${sourceDir}/cmake_toolchains/host-lin/gnu-aarch64-none-linux-gcc.cmake",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
         "UNITY_ROOT_PATH": "../unity",
@@ -17,35 +16,12 @@
       "environment": {
         "AARCH64_LINUX_GNU_SYSROOT": "/opt/gcc-arm-10.2/aarch64-none-linux-gnu/libc",
         "UMASK": "002"
-      }
-    },
-    {
-      "name": "Debug-aarch64-host-lin",
-      "inherits": "default-aarch64-host-lin",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
-      }
-    },
-    {
-      "name": "RelWithDebInfo-aarch64-host-lin",
-      "inherits": "default-aarch64-host-lin",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
-      }
-    },
-    {
-      "name": "Release-aarch64-host-lin",
-      "inherits": "default-aarch64-host-lin",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
-    },
-    {
-      "name": "default-linux-host-lin",
+      }},
+    { "name": "default-linux-host-lin",
       "hidden": true,
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
-      "toolchainFile": "${sourceDir}/cmake/host-lin/gcc.cmake",
+      "toolchainFile": "${sourceDir}/cmake_toolchains/host-lin/gnu-x86_64-linux-gcc.cmake",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "UNITY_ROOT_PATH": "../unity",
@@ -55,29 +31,37 @@
       },
       "environment": {
           "UMASK": "002"
-      }
-    },
-    {
-      "name": "Debug-linux-host-lin",
+      }},
+    { "name": "Debug-aarch64-host-lin",
+      "inherits": "default-aarch64-host-lin",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }},
+    { "name": "RelWithDebInfo-aarch64-host-lin",
+      "inherits": "default-aarch64-host-lin",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }},
+    { "name": "Release-aarch64-host-lin",
+      "inherits": "default-aarch64-host-lin",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }},
+    { "name": "Debug-linux-host-lin",
       "inherits": "default-linux-host-lin",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
-      }
-    },
-    {
-      "name": "RelWithDebInfo-linux-host-lin",
+      }},
+    { "name": "RelWithDebInfo-linux-host-lin",
       "inherits": "default-linux-host-lin",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
-      }
-    },
-    {
-      "name": "Release-linux-host-lin",
+      }},
+    { "name": "Release-linux-host-lin",
       "inherits": "default-linux-host-lin",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
-      }
-    }
+      }}
   ],
   "testPresets": [
     {
